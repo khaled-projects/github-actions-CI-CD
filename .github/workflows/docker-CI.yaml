@@ -74,6 +74,8 @@ jobs:
          docker logs my-app-container
      
       # Step 6: Test the Application and Save Response
+      - name: Wait for Application to Start
+        run: sleep 10
       - name: Test Application and Save Response
         run: |
           curl http://localhost:3000 > response.html
