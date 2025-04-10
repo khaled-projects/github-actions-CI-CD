@@ -1,0 +1,28 @@
+name: ASCII Art Cowsay Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-ascii-art:
+    name: Generate ASCII Art
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install cowsay CLI
+      - name: Install Cowsay
+        run: sudo apt-get update && sudo apt-get install -y cowsay
+
+      # Step 3: Generate ASCII artwork and save to a file
+      - name: Generate ASCII Art
+        run: cowsay "hello khaled neji" > cowsay_output.txt
+
+      # Step 4: Read and display the file contents
+      - name: Read Cowsay Output
+        run: cat cowsay_output.txt
