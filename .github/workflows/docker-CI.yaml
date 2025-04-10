@@ -84,7 +84,7 @@ jobs:
       - name: Upload HTML Response
         uses: actions/upload-artifact@v4
         with:
-          name: html-response # Name of the artifact
+          name: html-response # Name of artifact
           path: response.html # Path to the file to upload
           if-no-files-found: error # Fail the action if the file is not found
           retention-days: 7 # Retain the artifact for 7 days
