@@ -67,7 +67,16 @@ jobs:
             -p 3000:3000 \
             --name my-app-container \
             ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.run_number }}
-      # Step 4: Test the Application
+     
+      # Step 4: Log Docker Container Output
+      - name: Log Docker Container Output
+        run: |
+         docker logs my-app-container
+     
+      # Step 5: Test the Application
+      - name: Wait for Application to Start
+        run: sleep 60
+
       - name: Test Application
         run: |
           curl http://localhost:3000      
