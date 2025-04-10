@@ -1,16 +1,31 @@
-name: Publish AsciiDoc to GitHub Pages
+name: Solar System Workflow1
 
-on:
+on: 
+  workflow_dispatch:
   push:
     branches:
       - main
-
+      - 'feature/*'
+    
 jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: manoelcampos/asciidoctor-ghpages-lfs@main
+    unit-testing:
+        name: Unit Testing
+        runs-on: ubuntu-latest
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
 
-
-       
+        - name: Setup NodeJS Version
+          uses: actions/setup-node@v3
+          with:
+            node-version: 20
+    
+        - name: Install Dependencies
+          run: npm install
+    
+        - name: Unit Testing
+          run: npm test
