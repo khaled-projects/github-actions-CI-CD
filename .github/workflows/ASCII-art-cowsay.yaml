@@ -27,10 +27,14 @@ jobs:
         run: test -f combined_output.txt && echo "File exists" || echo "File does not exist"
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ascii-artifact
           path: combined_output.txt
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 6
+          overwrite: true
 
   grep-file:
     name: Grep for File
@@ -38,7 +42,7 @@ jobs:
     needs: execute-and-upload
     steps:
       - name: Download Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ascii-artifact
 
@@ -51,7 +55,7 @@ jobs:
     needs: grep-file
     steps:
       - name: Download Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ascii-artifact
 
