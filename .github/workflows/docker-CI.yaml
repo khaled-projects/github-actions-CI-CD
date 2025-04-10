@@ -73,10 +73,14 @@ jobs:
         run: |
          docker logs my-app-container
      
-      # Step 5: Test the Application
-      - name: Wait for Application to Start
-        run: sleep 60
-
-      - name: Test Application
+      # Step 6: Test the Application and Save Response
+      - name: Test Application and Save Response
         run: |
-          curl http://localhost:3000      
+          curl http://localhost:3000 > response.html
+
+      # Step 7: Upload HTML Response as Artifact
+      - name: Upload HTML Response
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-response
+          path: response.html    
