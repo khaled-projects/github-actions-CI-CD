@@ -67,3 +67,7 @@ jobs:
             -p 3000:3000 \
             --name my-app-container \
             ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.run_number }}
+      # Step 4: Test the Application
+      - name: Test Application
+        run: |
+          curl http://localhost:3000      
