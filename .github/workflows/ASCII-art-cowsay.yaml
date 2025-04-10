@@ -19,10 +19,14 @@ jobs:
       - name: Install Cowsay
         run: sudo apt-get update && sudo apt-get install -y cowsay
 
-      # Step 3: Generate ASCII artwork and save to a file
-      - name: Generate ASCII Art
-        run: cowsay "hello khaled neji" > cowsay_output.txt
+      # Step 3: Set permissions for the script
+      - name: Set Script Permissions
+        run: chmod +x ASCII-script.sh
 
-      # Step 4: Read and display the file contents
-      - name: Read Cowsay Output
-        run: cat cowsay_output.txt
+      # Step 4: Execute the script
+      - name: Execute ASCII Script
+        run: ./ASCII-script.sh > combined_output.txt
+
+      # Step 5: Read and display the combined file contents
+      - name: Read Combined Output
+        run: cat combined_output.txt
